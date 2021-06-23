@@ -60,12 +60,20 @@ extern const string fileDirectory = "/tmp/";
 extern const bool useCloudRing = true; // if true, ang_res_y and ang_bottom are not used
 
 // VLP-16
-extern const int N_SCAN = 16;
+// extern const int N_SCAN = 16;
+// extern const int Horizon_SCAN = 1800;
+// extern const float ang_res_x = 0.2;
+// extern const float ang_res_y = 2.0;
+// extern const float ang_bottom = 15.0+0.1;
+// extern const int groundScanInd = 7;
+
+// HDL-32C (jcg) Try this out, might have issues with non-uniform elevation angles
+extern const int N_SCAN = 32;
 extern const int Horizon_SCAN = 1800;
-extern const float ang_res_x = 0.2;
-extern const float ang_res_y = 2.0;
-extern const float ang_bottom = 15.0+0.1;
-extern const int groundScanInd = 7;
+extern const float ang_res_x = 360.0/float(Horizon_SCAN); // These are basically invalid, and shouldn't be used
+extern const float ang_res_y = 40.0/float(N_SCAN-1); // These are basically invalid, and shouldn't be used
+extern const float ang_bottom = 25.0;
+extern const int groundScanInd = 20; // (jcg) This value corresponds with 0 degrees (horizontal) right now
 
 // HDL-32E
 // extern const int N_SCAN = 32;
@@ -109,7 +117,7 @@ extern const int systemDelay = 0;
 extern const int imuQueLength = 200;
 
 extern const float sensorMinimumRange = 1.0;
-extern const float sensorMountAngle = 0.0;
+extern const float sensorMountAngle = 0.0; // Pitch Angle??
 extern const float segmentTheta = 60.0/180.0*M_PI; // decrese this value may improve accuracy
 extern const int segmentValidPointNum = 5;
 extern const int segmentValidLineNum = 3;
@@ -120,7 +128,7 @@ extern const float segmentAlphaY = ang_res_y / 180.0 * M_PI;
 extern const int edgeFeatureNum = 2;
 extern const int surfFeatureNum = 4;
 extern const int sectionsTotal = 6;
-extern const float edgeThreshold = 0.1;
+extern const float edgeThreshold = 0.1; // 0.1; // Could try a higher edgeThreshold to prevent bad edges from sneaking in
 extern const float surfThreshold = 0.1;
 extern const float nearestFeatureSearchSqDist = 25;
 
